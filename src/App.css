@@ -1,0 +1,222 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Fira Code", monospace;
+  color: #fff;
+  background: #000;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* Starfield canvas */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Main Header */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.header-left {
+  flex: 1;
+  min-width: 250px;
+}
+
+.name {
+  font-size: 2.8rem;
+  margin: 0 0 0.5rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #00ffae;
+  margin-bottom: 1rem;
+}
+
+.summary-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin-bottom: 1rem;
+  max-width: 550px;
+}
+
+/* Header Right */
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.profile-photo-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  border: 2px solid #00ffae;
+  box-shadow: 0 0 15px rgba(0, 255, 174, 0.5);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contacts a, .contacts span {
+  font-size: 0.95rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.contacts a:hover {
+  color: #00ffae;
+}
+
+/* Card Styling */
+.card {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 255, 174, 0.2);
+  word-wrap: break-word;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #00ffae;
+  border-bottom: 2px solid rgba(0, 255, 174, 0.5);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Contact Card */
+.contact-card {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.contact-card .contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-card h2 {
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+
+/* Typing animation */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #00ffae;
+  white-space: nowrap;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #00ffae; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .contacts {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-photo-placeholder {
+    width: 120px;
+    height: 120px;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .summary-text {
+    max-width: 100%;
+    white-space: normal;
+  }
+  
+  .typing {
+    white-space: normal;
+    border-right: none;
+    animation: none;
+  }
+}
