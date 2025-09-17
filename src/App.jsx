@@ -121,11 +121,12 @@ function CertificateScroller({ folder, count, title }) {
             <div key={i} className="certificate-item">
               <div className="certificate-image">
                 <img 
-                  src={`/assets/${folder}/${i+1}.jpg`} 
+                  src={`/${folder}/${i+1}.jpg`} 
                   alt={`${title} Certificate ${i+1}`}
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                    const fallback = e.target.nextSibling;
+                    if (fallback) fallback.style.display = 'flex';
                   }}
                 />
                 <div className="certificate-fallback">
@@ -139,11 +140,12 @@ function CertificateScroller({ folder, count, title }) {
             <div key={`dup-${i}`} className="certificate-item">
               <div className="certificate-image">
                 <img 
-                  src={`/assets/${folder}/${i+1}.jpg`} 
+                  src={`/${folder}/${i+1}.jpg`} 
                   alt={`${title} Certificate ${i+1}`}
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                    const fallback = e.target.nextSibling;
+                    if (fallback) fallback.style.display = 'flex';
                   }}
                 />
                 <div className="certificate-fallback">
@@ -186,11 +188,10 @@ Not shown: 991 closed tcp ports (reset)
 PORT     STATE SERVICE    VERSION
 22/tcp   open  ssh        OpenSSH 8.9p1 (Penetration Tester)
 53/tcp   open  domain     DNS (Security Analyst)
-80/tcp   open  http       nginx 1.18.0 (Web Developer)
+80/tcp   open  http       nginx 1.18.0 (Shopify / Ai Web designer)
 443/tcp  open  ssl/https  nginx 1.18.0 (Secure Developer)
-8080/tcp open  http-proxy nginx 1.18.0 (API Developer)
-9000/tcp open  cslistener Shopify Developer
-21/tcp   open  ftp        File Transfer Protocol (Content Creator)
+8080/tcp open  http-proxy nginx 1.18.0 (Associate Software Engineer)
+9000/tcp open  cslistener Canva Designer(photo/video)
 25/tcp   open  smtp       Postfix SMTP (Email Analyst)
 139/tcp  open  netbios-ssn Samba (Network Administrator)
 
@@ -198,6 +199,23 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 2.15 seconds`,
     "uname -a": "Kali Sridhar 6.1.0-kali9-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.1.46-1 (2023-10-13) x86_64 GNU/Linux",
     "ifconfig": `eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.108  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 ae80::b00:27cf:de4e:26a1  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)
+        RX packets 128766  bytes 169382491 (161.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 75216  bytes 5772597 (5.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 245  bytes 20428 (19.9 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 245  bytes 20428 (19.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0`,
+    "ipconfig": `eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.1.108  netmask 255.255.255.0  broadcast 192.168.1.255
         inet6 ae80::b00:27cf:de4e:26a1  prefixlen 64  scopeid 0x20<link>
         ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)
@@ -392,16 +410,16 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer className="funky-footer">
+    <footer className="main-footer">
       <div className="footer-content">
         <div className="footer-text">
-          <span className="copyright-symbol">©</span>
-          <span className="copyright-text">2024 श्रीdhaర్ Akondi</span>
+          <span className="copyright">© 2024 Sridhar Akondi. All rights reserved.</span>
         </div>
-        <div className="footer-decoration">
-          <span className="decoration-star">✦</span>
-          <span className="decoration-heart">♥</span>
-          <span className="decoration-star">✦</span>
+        <div className="footer-nav">
+          <a href="#terminal">Terminal</a>
+          <a href="#about">About</a>
+          <a href="#internships">Internships</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
     </footer>
@@ -427,7 +445,7 @@ function App() {
     <div className="app">
       <Starfield />
       
-      <header className="main-header" ref={headerRef}>
+      <header className={`main-header ${isScrolled ? 'scrolled' : ''}`} ref={headerRef}>
         <div className="header-line"></div>
         <nav className="header-nav">
           <a href="#terminal">Terminal</a>
@@ -461,12 +479,13 @@ function App() {
                 onMouseLeave={() => setHoverText(false)}
               >
                 <img 
-                  src="/assets/photos/profile.jpg" 
+                  src="/profile.jpg" 
                   alt="Sridhar" 
                   className="profile-img"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                    const fallback = e.target.nextSibling;
+                    if (fallback) fallback.style.display = 'flex';
                   }}
                 />
                 <div className="profile-fallback">
@@ -604,11 +623,12 @@ function App() {
                 <div key={i} className="nptel-item">
                   <div className="certificate-image">
                     <img 
-                      src={`/assets/NPTEL/${i+1}.jpg`} 
+                      src={`/NPTEL/${i+1}.jpg`} 
                       alt={`NPTEL Certificate ${i+1}`}
                       onError={(e) => {
                         e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
+                        const fallback = e.target.nextSibling;
+                        if (fallback) fallback.style.display = 'flex';
                       }}
                     />
                     <div className="certificate-fallback">

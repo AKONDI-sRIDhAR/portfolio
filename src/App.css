@@ -41,12 +41,17 @@ body {
   position: fixed; 
   top: 0; 
   width: 100%;
-  height:9%;
+  height: 9%;
   z-index: 100; 
-  background: gba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
   padding: 0; 
   transition: all 0.3s ease;
-  backdrop-filter: blur(3px); 
+  backdrop-filter: blur(10px) !important;
+}
+
+.main-header.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 255, 174, 0.2);
 }
 
 .header-line { 
@@ -488,7 +493,7 @@ body {
 /* Achievements Grid */
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
@@ -505,11 +510,6 @@ body {
 .achievement-card p {
   color: #e0e0e0;
   line-height: 1.5;
-}
-.achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -724,6 +724,50 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Footer */
+.main-footer {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(0, 255, 174, 0.2);
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-text {
+  color: #00ffae;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.footer-nav a {
+  color: #00ffae;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.footer-nav a:hover {
+  color: #fff;
+}
+
+.copyright {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) { 
   .container { 
@@ -769,6 +813,10 @@ body {
   .termux-ascii { 
     font-size: 0.5rem; 
   }
+  
+  .footer-nav {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) { 
@@ -800,5 +848,10 @@ body {
   
   .certificate-item {
     width: 150px;
+  }
+  
+  .footer-nav {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 }
