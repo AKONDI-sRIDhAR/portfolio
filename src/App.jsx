@@ -10,24 +10,28 @@ function Starfield() {
     if (!ctx) return;
 
     let stars = [];
-    const numStars = 300;
+    const numStars = 500;
     let animationFrameId;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
-      canvas.height = document.body.scrollHeight;
+      canvas.height = window.innerHeight;
       stars = Array.from({ length: numStars }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5,
+        radius: Math.random() * 1.5 + 0.5,
         speed: Math.random() * 0.8 + 0.2,
+        opacity: Math.random() * 0.8 + 0.2
       }));
     }
 
     function drawStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#ffffff';
       stars.forEach(star => {
+        ctx.globalAlpha = star.opacity;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -38,6 +42,7 @@ function Starfield() {
           star.x = Math.random() * canvas.width;
         }
       });
+      ctx.globalAlpha = 1;
       animationFrameId = requestAnimationFrame(drawStars);
     }
 
@@ -51,89 +56,581 @@ function Starfield() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="starfield"></canvas>;
+  return <canvas ref={canvasRef} className="starfield" style={{display: 'block'}}></canvas>;
 }
 
-function TypingText({ text, speed = 30 }) {
-  const [displayed, setDisplayed] = useState("");
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(text.slice(0, i + 1));
-      i++;
-      if (i === text.length) clearInterval(interval);
-    }, speed);
-    return () => clearInterval(interval);
-  }, [text, speed]);
+function TermuxBanner() {
+  return (
+    <div className="termux-banner">
+      <pre className="termux-ascii gradient-text">{`
+  ███████╗██████╗ ██╗██████╗ ██╗  ██╗ █████╗ ██████╗ 
+  ██╔════╝██╔══██╗██║██╔══██╗██║  ██║██╔══██╗██╔══██╗
+  ███████╗██████╔╝██║██║  ██║███████║███████║██████╔╝
+  ╚════██║██╔══██╗██║██║  ██║██╔══██║██╔══██║██╔══██╗
+  ███████║██║  ██║██║██████╔╝██║  ██║██║  ██║██║  ██║
+  ╚══════╝╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+      `}</pre>
+      <div className="termux-info">
+        Welcome to <span className="sridhar-text">SRIDHAR</span>'s Terminal Portfolio v1.0
+      </div>
+      <div className="termux-help">
+        Type 'help' to see available commands: ls, whoami, cat [filename], clear
+      </div>
+    </div>
+  );
+}
 
-  return <span className="typing">{displayed}</span>;
+function CertificateScroller({ folder, count, title }) {
+  const scrollerRef = useRef(null);
+  const containerRef = useRef(null);
+  
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    const container = containerRef.current;
+    if (!scroller || !container) return;
+    
+    let animationFrame;
+    let position = 0;
+    const speed = 1;
+    
+    const animate = () => {
+      position -= speed;
+      
+      // Reset position when the first set of certificates has completely scrolled out
+      if (position < -scroller.scrollWidth / 2) {
+        position = 0;
+      }
+      
+      scroller.style.transform = `translateX(${position}px)`;
+      animationFrame = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
+
+  return (
+    <div className="certificate-scroller-container" ref={containerRef}>
+      <h3>{title}</h3>
+      <div className="certificate-scroller-wrapper">
+        <div className="certificate-scroller" ref={scrollerRef}>
+          {[...Array(count)].map((_, i) => (
+            <div key={i} className="certificate-item">
+              <div className="certificate-image">
+                <img 
+                  src={`/assets/${folder}/${i+1}.jpg`} 
+                  alt={`${title} Certificate ${i+1}`}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="certificate-fallback">
+                  {title} {i+1}
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* Duplicate for seamless looping */}
+          {[...Array(count)].map((_, i) => (
+            <div key={`dup-${i}`} className="certificate-item">
+              <div className="certificate-image">
+                <img 
+                  src={`/assets/${folder}/${i+1}.jpg`} 
+                  alt={`${title} Certificate ${i+1}`}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="certificate-fallback">
+                  {title} {i+1}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TerminalSimulation() {
+  const [inputValue, setInputValue] = useState("");
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [showBanner, setShowBanner] = useState(true);
+  const terminalRef = useRef(null);
+  const inputRef = useRef(null);
+
+ const commandResponses = {    
+    "ls": "aboutme.txt  alma_matter.txt  internships.txt  skills.txt  projects.txt  contact.txt  achievements.txt  certificates.txt  languages.txt  softskills.txt",    
+    "whoami": "akondi_sridhar",    
+    "cat aboutme.txt": "Cyber Security Analyst and software developer with a passion for ethical hacking and innovative projects. Leading teams and building IoT and security tools while studying B.Tech CSE at Manav Rachna University.",    
+    "cat alma_matter.txt": "Final-year B.Tech CSE student at Manav Rachna University, CGPA 8.2/10.0 (6 semester avg), and 7th-12th class graduate from Sri Chaitanya School (2017-2022).",    
+    "cat internships.txt": "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - Present)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",    
+    "cat skills.txt": "Pentesting & Security Tools: Burp Suite, Metasploit, ZAP, Wireshark, OWASP ZAP, OSINT tools, VAPT, Phishing Analysis\nForensics & Analysis: Autopsy, FTK Imager, Volatility\nLanguages: Java, Python, C, SQL, HTML\nEnvironments: Kali Linux, Parrot OS, Windows\nOther: Canva (video/photo editing), Shopify, Tinkercad, Data Entry",    
+    "cat achievements.txt": "- Served as Vice-President and ISR Coordinator at Dr. OP Bhalla Foundation\n- Balanced 8.2 CGPA with multiple internships and leadership roles\n- Received LOA from Dr. OP Bhalla Foundation\n- Completed 4 internships\n- Received ₹37,000 from university to develop an IoT project\n- Participated in NASA Space Settlement Contest",    
+    "cat projects.txt": "- Smart Parking with Route Mapping (Prototype)\n- Phishing Awareness App (Ongoing)\n- FortiCheck\n- Email Header Analyzer\n- Phish Detector\n- Attendance Management System",    
+    "cat contact.txt": "Email: akondisridhar@gmail.com\nPhone: +91 9398563607\nAddress: Tatiparthi, 533444, Andhra Pradesh\nLinkedIn: https://www.linkedin.com/in/akondi-sridhar-43b85a250\nGitHub: https://github.com/AKONDI-sRIDhAR/",    
+    "cat certificates.txt": "1. LinkedIn Certifications\n2. NPTEL Swayam\n3. Google Coursera\n4. Infosys Springboard\n5. Cisco Networking\n6. Quick Heal Certification",    
+    "cat languages.txt": "Telugu - Native\nEnglish - Fluent\nHindi - Intermediate\nSpanish - Basic",    
+    "cat softskills.txt": "Leadership\nTeamwork and Collaboration\nProblem-Solving\nAdaptability\nTime Management",    
+    "help": "Available commands:\n- ls: List files\n- whoami: Display current user\n- cat [filename]: Display file contents\n- clear: Clear terminal\n- help: Show this help message\n- nmap sridhar: Scan for open roles\n- uname -a: Display system details\n- ifconfig: Network interface information\n- ping: Check connectivity\n- whois sridhar: Get registrar information\n- history: Show command history",    
+    "nmap sridhar": `Starting Nmap 7.94 ( https://nmap.org ) at 2025-09-17 12:00 IST
+Nmap scan report for sridhar (127.0.0.1)
+Host is up (0.00021s latency).
+Not shown: 991 closed tcp ports (reset)
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 8.9p1 (Penetration Tester)
+53/tcp   open  domain     DNS (Security Analyst)
+80/tcp   open  http       nginx 1.18.0 (Web Developer)
+443/tcp  open  ssl/https  nginx 1.18.0 (Secure Developer)
+8080/tcp open  http-proxy nginx 1.18.0 (API Developer)
+9000/tcp open  cslistener Shopify Developer
+21/tcp   open  ftp        File Transfer Protocol (Content Creator)
+25/tcp   open  smtp       Postfix SMTP (Email Analyst)
+139/tcp  open  netbios-ssn Samba (Network Administrator)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 2.15 seconds`,
+    "uname -a": "Kali Sridhar 6.1.0-kali9-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.1.46-1 (2023-10-13) x86_64 GNU/Linux",
+    "ifconfig": `eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.108  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 ae80::b00:27cf:de4e:26a1  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)
+        RX packets 128766  bytes 169382491 (161.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 75216  bytes 5772597 (5.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 245  bytes 20428 (19.9 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 245  bytes 20428 (19.9 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0`,
+    "ping -c 4 google.com": `PING google.com (142.251.42.206) 56(84) bytes of data.
+64 bytes from bom12s18-in-f14.1e100.net (142.251.42.206): icmp_seq=1 ttl=116 time=12.8 ms
+64 bytes from bom12s18-in-f14.1e100.net (142.251.42.206): icmp_seq=2 ttl=116 time=13.2 ms
+64 bytes from bom12s18-in-f14.1e100.net (142.251.42.206): icmp_seq=3 ttl=116 time=12.9 ms
+64 bytes from bom12s18-in-f14.1e100.net (142.251.42.206): icmp_seq=4 ttl=116 time=13.5 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3005ms
+rtt min/avg/max/mdev = 12.837/13.127/13.542/0.277 ms`,
+    "whois sridhar": `[Querying whois.verisign-grs.com]
+[Redirected to whois.publicinterestregistry.org]
+[Querying whois.publicinterestregistry.org]
+[whois.publicinterestregistry.org]
+
+Domain Name: SRIDHAR
+Registry Domain ID: D12345-PIR
+Registrar WHOIS Server: whois.godaddy.com
+Registrar URL: http://www.godaddy.com
+Updated Date: 2023-05-17T10:15:23Z
+Creation Date: 2004-10-17T18:25:43Z
+Registry Expiry Date: 2030-10-17T18:25:43Z
+Registrar: GoDaddy.com, LLC
+
+Registrant Name: Akondi Naga Sri Sai Datta Sridhar
+Registrant Organization: Cyber Security Specialist
+Registrant Street: Tatiparthi, Andhra Pradesh
+Registrant City: Pithapuram
+Registrant Postal Code: 533445
+Registrant Country: IN
+Registrant Phone: +91 9398563607
+
+Name Server: NS1.SRIDHARSECURITY.COM
+Name Server: NS2.SRIDHARSECURITY.COM
+
+DNSSEC: unsigned
+
+>>> Last update of WHOIS database: 2025-09-17T12:05:23Z <<<`,
+    "history": `    1  ls
+    2  whoami
+    3  cat aboutme.txt
+    4  nmap sridhar
+    5  uname -a
+    6  ifconfig
+    7  ping -c 4 google.com
+    8  whois sridhar
+    9  history`,
+    "clear": ""  
+};
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [commandHistory]);
+
+  const handleCommandSubmit = (e) => {
+    e.preventDefault();
+    if (!inputValue.trim()) return;
+
+    const newCommand = inputValue.trim();
+    let response = "Command not found. Type 'help' for available commands.";
+    
+    if (commandResponses[newCommand] !== undefined) {
+      response = commandResponses[newCommand];
+      
+      if (newCommand === "clear") {
+        setCommandHistory([]);
+        setInputValue("");
+        setShowBanner(true);
+        return;
+      }
+    }
+    
+    setCommandHistory(prev => [...prev, { command: newCommand, response }]);
+    setInputValue("");
+  };
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  return (
+    <div className="terminal-container">
+      <div className="terminal-header">
+        <div className="terminal-buttons">
+          <div className="terminal-button close"></div>
+          <div className="terminal-button minimize"></div>
+          <div className="terminal-button maximize"></div>
+        </div>
+        <div className="terminal-title">sridhar@kali: ~</div>
+      </div>
+      <div className="terminal-content" ref={terminalRef} onClick={focusInput}>
+        {showBanner && <TermuxBanner />}
+        
+        {commandHistory.map((cmd, index) => (
+          <div key={index} className="command-block">
+            <div className="command-line">
+              <span className="prompt">sridhar@kali:~$ </span>
+              <span className="command">{cmd.command}</span>
+            </div>
+            {cmd.response && <div className="command-output">{cmd.response}</div>}
+          </div>
+        ))}
+        
+        <div className="command-block">
+            <div className="command-line">
+              <span className="prompt">sridhar@kali:~$ </span>
+              <form onSubmit={handleCommandSubmit} className="command-form">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="command-input"
+                  autoFocus
+                  spellCheck="false"
+                  autoComplete="off"
+                />
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+  );
+}
+
+function ContactSection() {
+  return (
+    <section id="contact" className="content-section">
+      <h2>Contact Me</h2>
+      <div className="contact-grid">
+        <a href="mailto:akondisridhar@gmail.com" className="contact-card card">
+          <div className="contact-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ffae">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <h3>Email</h3>
+          <p>akondisridhar@gmail.com</p>
+        </a>
+        
+        <a href="https://github.com/AKONDI-sRIDhAR" target="_blank" rel="noopener noreferrer" className="contact-card card">
+          <div className="contact-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ffae">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+          <h3>GitHub</h3>
+          <p>AKONDI-sRIDhAR</p>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/akondi-sridhar-43b85a250" target="_blank" rel="noopener noreferrer" className="contact-card card">
+          <div className="contact-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ffae">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <h3>LinkedIn</h3>
+          <p>akondi-sridhar</p>
+        </a>
+        
+        <a href="https://x.com/Sridhar_akondi" target="_blank" rel="noopener noreferrer" className="contact-card card">
+          <div className="contact-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ffae">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </div>
+          <h3>Twitter / X</h3>
+          <p>@Sridhar_akondi</p>
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="funky-footer">
+      <div className="footer-content">
+        <div className="footer-text">
+          <span className="copyright-symbol">©</span>
+          <span className="copyright-text">2024 श्रीdhaర్ Akondi</span>
+        </div>
+        <div className="footer-decoration">
+          <span className="decoration-star">✦</span>
+          <span className="decoration-heart">♥</span>
+          <span className="decoration-star">✦</span>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
 function App() {
-  const summaryText = `I build tools and solutions around cybersecurity — phishing detectors, email header analyzers, and VAPT tooling. Passionate about ethical hacking, threat analysis, and mentoring peers. Outside of tech, I love hitting the gym, biking, and community projects.`;
+  const [hoverText, setHoverText] = useState(false);
+  const headerRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 50;
+      setIsScrolled(scrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <>
+    <div className="app">
       <Starfield />
+      
+      <header className="main-header" ref={headerRef}>
+        <div className="header-line"></div>
+        <nav className="header-nav">
+          <a href="#terminal">Terminal</a>
+          <a href="#about">About</a>
+          <a href="#internships">Internships</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#achievements">Achievements</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+      
       <div className="container">
-        <header className="main-header">
-          <div className="header-left">
-            <h1 className="name">Akondi Naga Sri Sai Datta Sridhar</h1>
-            <p className="subtitle">Pentester / Aspiring Software Developer</p>
-            <p className="summary-text">
-              <TypingText text={summaryText} />
-            </p>
-          </div>
-          <div className="header-right">
-            <div className="profile-photo-placeholder">
-              {/* Replace with your actual image */}
-              <span>Profile Photo</span>
+        <section id="terminal" className="content-section">
+          <TerminalSimulation />
+        </section>
+
+        <section id="about" className="content-section">
+          <h2>About Me</h2>
+          <div className="about-content">
+            <div className="about-text">
+              <p>
+                Yo! I'm Akondi Naga Sri Sai Datta Sridhar, a cybersecurity buff and coder who loves hacking threats and building cool tech! A B.Tech CSE champ at Manav Rachna University (8.2 CGPA), I've rocked 4 internships, served as Vice President at Dr. OP Bhalla Foundation Student Council, and geek out as an AI enthusiast and fitness buff—using AI to streamline my daily grind!
+              </p>
             </div>
-            <div className="contacts">
-              <a href="mailto:your@email.com">📧 your@email.com</a>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
-              <a href="https://github.com/yourgithub" target="_blank" rel="noreferrer">💻 GitHub</a>
-              <span>📱 +91-XXXXXXXXXX</span>
+            <div className="profile-photo">
+              <div 
+                className="photo-placeholder"
+                onMouseEnter={() => setHoverText(true)}
+                onMouseLeave={() => setHoverText(false)}
+              >
+                <img 
+                  src="/assets/photos/profile.jpg" 
+                  alt="Sridhar" 
+                  className="profile-img"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="profile-fallback">
+                  <span>SR</span>
+                </div>
+                {hoverText && (
+                  <div className="hover-text">
+                    You will call me <span className="gradient-text">SRIDHAR</span>!
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </header>
-
-        <div className="cards-grid">
-          <section className="card">
-            <h2>Technical Skills</h2>
-            <p>Java • Python • C • SQL • VAPT • Penetration Testing • Threat Analysis</p>
-          </section>
-
-          <section className="card">
-            <h2>Experience & Internships</h2>
-            <p>
-              Worked on cybersecurity projects including VAPT assessments and phishing detection tools. 
-              Collaborated with teams on building secure applications and analyzing threats.
-            </p>
-          </section>
-
-          <section className="card">
-            <h2>Projects</h2>
-            <p>Phishing app, Smart Parking prototype, FortiCheck, and more.</p>
-          </section>
-
-          <section className="card">
-            <h2>Achievements</h2>
-            <p>Awarded for ethical hacking challenge, certified in cybersecurity fundamentals.</p>
-          </section>
-        </div>
-
-        <section className="contact-card card">
-          <h2>Contact Me</h2>
-          <div className="contact-details">
-            <a href="mailto:your@email.com">📧 your@email.com</a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">🔗 LinkedIn</a>
-            <a href="https://github.com/yourgithub" target="_blank" rel="noreferrer">💻 GitHub</a>
-            <span>📱 +91-XXXXXXXXXX</span>
           </div>
         </section>
+
+        <section id="internships" className="content-section">
+          <h2>Internships</h2>
+          <div className="internships-grid">
+            <div className="internship-item">
+              <h3>Engineers World Pvt Limited (11/2024 - Present)</h3>
+              <p>Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+            <div className="internship-item">
+              <h3>Luxe By Kan (07/2025 - 08/2025)</h3>
+              <p>Shopify Web Design & Development Intern, improved UI/UX with animations and achieved a 100 in Search Engine Optimization.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+            <div className="internship-item">
+              <h3>Blue Planet Solutions Pvt Limited (05/2024 - 06/2024)</h3>
+              <p>CSR Intern, supported social responsibility initiatives with AICTE and assisted in developing the CJN collaboration platform.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+            <div className="internship-item">
+              <h3>Intrainz (10/2023 - 12/2023)</h3>
+              <p>Cyber Security Trainee, gained foundational experience with tools like Nmap and Tor, completing introductory labs and documentation tasks.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="content-section">
+          <h2>Projects</h2>
+          <div className="projects-grid">
+            <div className="project-card card">
+              <h3>Personal Portfolio</h3>
+              <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Smart Parking with Route Mapping (Prototype)</h3>
+              <p>Developed an IoT-enabled parking optimization system with ₹37,000 funding from the university.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Phishing Awareness App (Ongoing)</h3>
+              <p>Creating a gamified application to educate users on phishing, supported by a submitted research paper.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Phish Detector</h3>
+              <p>A dataset-driven classifier for detecting spam and phishing emails using machine learning.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Email Header Analyzer</h3>
+              <p>A Java tool analyzing .eml files for SPF, DKIM, and DMARC to ensure email authenticity.</p>
+            </div>
+            <div className="project-card card"> 
+               <h3>FortiCheck</h3>
+               <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.</p>
+               </div>
+          </div>
+        </section>
+
+<section id="skills" className="content-section">
+  <h2>Skills</h2>
+  <div className="skills-grid">
+    <div className="skill-category">
+      <h3>Soft Skills</h3>
+      <p>• Leadership • Communication<br />• Teamwork & Collaboration <br />• Problem-Solving <br />• Time Management <br />• Attention to Detail</p>
+    </div>
+    <div className="skill-category">
+      <h3>Programming Languages</h3>
+      <p>• Java<br /> • C<br /> • Python<br /> • SQL<br /> • HTML<br /> </p>
+    </div>
+    <div className="skill-category">
+      <h3>Tools & Environments</h3>
+      <p>• Windows • Linux <br />• Git/GitHub • Canva<br /> • Shopify • Tinkercad <br />• Ai tools <br />• Lovable, Gemini, Grok, etc</p>
+    </div>
+    <div className="skill-category full-width">
+      <h3>Cybersecurity</h3>
+      <p>• Burp Suite • Metasploit • Wireshark • OWASP ZAP • OSINT tools • VAPT • Autopsy<br />• FTK Imager • Volatility • Malware Analysis • Threat Intelligence • Incident Response <br />• Regulatory Compliance (GDPR, HIPAA) • Computer Networks • DBMS • Operating Systems</p>
+    </div>
+  </div>
+</section>
+
+        <section id="achievements" className="content-section">
+  <h2>Achievements</h2>
+  <div className="achievements-grid">
+    <div className="achievement-card card">
+      <h3>Academics</h3>
+      <p>Balanced 8.2 CGPA with multiple internships and leadership roles</p>
+    </div>
+    <div className="achievement-card card">
+      <h3>Recognition</h3>
+      <p>Served as Vice-President and ISR Coordinator & Received LOA from Dr. OP Bhalla Foundation</p>
+    </div>
+    <div className="achievement-card card">
+      <h3>Project Funding</h3>
+      <p>Received ₹37,000 from university to develop an IoT project</p>
+    </div>
+    <div className="achievement-card card">
+      <h3>International Participation</h3>
+      <p>Participated in NASA Space Settlement Contest</p>
+    </div>
+  </div>
+</section>
+
+        <section id="certifications" className="content-section">
+          <h2>Certifications</h2>
+          
+          <div className="nptel-certificates">
+            <h3>NPTEL Certificates</h3>
+            <div className="nptel-grid">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="nptel-item">
+                  <div className="certificate-image">
+                    <img 
+                      src={`/assets/NPTEL/${i+1}.jpg`} 
+                      alt={`NPTEL Certificate ${i+1}`}
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    <div className="certificate-fallback">
+                      NPTEL {i+1}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <CertificateScroller folder="Other" count={9} title="Other Certificates" />
+          <CertificateScroller folder="Linkedin" count={10} title="LinkedIn Certificates" />
+          <CertificateScroller folder="achivements" count={8} title="Achievement Certificates" />
+          <CertificateScroller folder="Quickheal" count={9} title="Quick Heal Certificates" />
+        </section>
+
+        <ContactSection />
       </div>
-    </>
+      
+      <Footer />
+    </div>
   );
 }
 
