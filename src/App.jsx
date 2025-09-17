@@ -104,7 +104,6 @@ function CertificateScroller({ images, title }) {
     const animate = () => {
       position -= speed;
       
-      // Reset position when the first set of certificates has completely scrolled out
       if (position < -scroller.scrollWidth / 2) {
         position = 0;
       }
@@ -129,11 +128,7 @@ function CertificateScroller({ images, title }) {
             <div key={i} className="certificate-item">
               <div className="certificate-image">
                 <img 
-<<<<<<< HEAD
-                  src={`/${folder}/${i+1}.jpg`} 
-=======
                   src={image}
->>>>>>> 7d8d7880873f6e9339b72183d877d336bf0452db
                   alt={`${title} Certificate ${i+1}`}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -147,16 +142,11 @@ function CertificateScroller({ images, title }) {
               </div>
             </div>
           ))}
-          {/* Duplicate for seamless looping */}
           {images.map((image, i) => (
             <div key={`dup-${i}`} className="certificate-item">
               <div className="certificate-image">
                 <img 
-<<<<<<< HEAD
-                  src={`/${folder}/${i+1}.jpg`} 
-=======
                   src={image}
->>>>>>> 7d8d7880873f6e9339b72183d877d336bf0452db
                   alt={`${title} Certificate ${i+1}`}
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -183,7 +173,7 @@ function TerminalSimulation() {
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
 
- const commandResponses = {    
+  const commandResponses = {    
     "ls": "aboutme.txt  alma_matter.txt  internships.txt  skills.txt  projects.txt  contact.txt  achievements.txt  certificates.txt  languages.txt  softskills.txt",    
     "whoami": "akondi_sridhar",    
     "cat aboutme.txt": "Cyber Security Analyst and software developer with a passion for ethical hacking and innovative projects. Leading teams and building IoT and security tools while studying B.Tech CSE at Manav Rachna University.",    
@@ -295,7 +285,8 @@ DNSSEC: unsigned
     8  whois sridhar
     9  history`,
     "clear": ""  
-};
+  };
+
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -429,12 +420,7 @@ function Footer() {
     <footer className="main-footer">
       <div className="footer-content">
         <div className="footer-text">
-<<<<<<< HEAD
           <span className="copyright">© 2024 Sridhar Akondi. All rights reserved.</span>
-=======
-          <span className="copyright-symbol">©</span>
-          <span className="copyright-text">2024 SRIDHAR</span>
->>>>>>> 7d8d7880873f6e9339b72183d877d336bf0452db
         </div>
         <div className="footer-nav">
           <a href="#terminal">Terminal</a>
@@ -465,8 +451,6 @@ function App() {
   return (
     <React.Fragment>
       <Starfield />
-<<<<<<< HEAD
-      
       <header className={`main-header ${isScrolled ? 'scrolled' : ''}`} ref={headerRef}>
         <div className="header-line"></div>
         <nav className="header-nav">
@@ -501,13 +485,12 @@ function App() {
                 onMouseLeave={() => setHoverText(false)}
               >
                 <img 
-                  src="/profile.jpg" 
-                  alt="Sridhar" 
+                  src={profilePhoto}
+                  alt="Sridhar"
                   className="profile-img"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    const fallback = e.target.nextSibling;
-                    if (fallback) fallback.style.display = 'flex';
+                    e.target.nextSibling.style.display = 'flex';
                   }}
                 />
                 <div className="profile-fallback">
@@ -516,236 +499,160 @@ function App() {
                 {hoverText && (
                   <div className="hover-text">
                     You will call me <span className="gradient-text">SRIDHAR</span>!
-=======
-      <div className="app">
-        <header className="main-header" ref={headerRef}>
-          <div className="header-line"></div>
-          <nav className="header-nav">
-            <a href="#terminal">Terminal</a>
-            <a href="#about">About</a>
-            <a href="#internships">Internships</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#achievements">Achievements</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </header>
-
-        <div className="container">
-          <section id="terminal" className="content-section">
-            <TerminalSimulation />
-          </section>
-
-          <section id="about" className="content-section">
-            <h2>About Me</h2>
-            <div className="about-content">
-              <div className="about-text">
-                <p>
-                  Yo! I'm Akondi Naga Sri Sai Datta Sridhar, a cybersecurity buff and coder who loves hacking threats and building cool tech! A B.Tech CSE champ at Manav Rachna University (8.2 CGPA), I've rocked 4 internships, served as Vice President at Dr. OP Bhalla Foundation Student Council, and geek out as an AI enthusiast and fitness buff—using AI to streamline my daily grind!
-                </p>
-              </div>
-              <div className="profile-photo">
-                <div
-                  className="photo-placeholder"
-                  onMouseEnter={() => setHoverText(true)}
-                  onMouseLeave={() => setHoverText(false)}
-                >
-                  <img
-                    src={profilePhoto}
-                    alt="Sridhar"
-                    className="profile-img"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                  <div className="profile-fallback">
-                    <span>SR</span>
->>>>>>> 7d8d7880873f6e9339b72183d877d336bf0452db
                   </div>
-                  {hoverText && (
-                    <div className="hover-text">
-                      You will call me <span className="gradient-text">SRIDHAR</span>!
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section id="internships" className="content-section">
-            <h2>Internships</h2>
-            <div className="internships-grid">
-              <div className="internship-item">
-                <h3>Engineers World Pvt Limited (11/2024 - Present)</h3>
-                <p>Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.</p>
-                <div className="certificate-hover">
-                  <div className="certificate-placeholder"> Certificate</div>
-                  <span>View Certificate</span>
-                </div>
-              </div>
-              <div className="internship-item">
-                <h3>Luxe By Kan (07/2025 - 08/2025)</h3>
-                <p>Shopify Web Design & Development Intern, improved UI/UX with animations and achieved a 100 in Search Engine Optimization.</p>
-                <div className="certificate-hover">
-                  <div className="certificate-placeholder"> Certificate</div>
-                  <span>View Certificate</span>
-                </div>
-              </div>
-              <div className="internship-item">
-                <h3>Blue Planet Solutions Pvt Limited (05/2024 - 06/2024)</h3>
-                <p>CSR Intern, supported social responsibility initiatives with AICTE and assisted in developing the CJN collaboration platform.</p>
-                <div className="certificate-hover">
-                  <div className="certificate-placeholder"> Certificate</div>
-                  <span>View Certificate</span>
-                </div>
-              </div>
-              <div className="internship-item">
-                <h3>Intrainz (10/2023 - 12/2023)</h3>
-                <p>Cyber Security Trainee, gained foundational experience with tools like Nmap and Tor, completing introductory labs and documentation tasks.</p>
-                <div className="certificate-hover">
-                  <div className="certificate-placeholder"> Certificate</div>
-                  <span>View Certificate</span>
-                </div>
+        <section id="internships" className="content-section">
+          <h2>Internships</h2>
+          <div className="internships-grid">
+            <div className="internship-item">
+              <h3>Engineers World Pvt Limited (11/2024 - Present)</h3>
+              <p>Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
               </div>
             </div>
-          </section>
-
-          <section id="projects" className="content-section">
-            <h2>Projects</h2>
-            <div className="projects-grid">
-              <div className="project-card card">
-                <h3>Personal Portfolio</h3>
-                <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
+            <div className="internship-item">
+              <h3>Luxe By Kan (07/2025 - 08/2025)</h3>
+              <p>Shopify Web Design & Development Intern, improved UI/UX with animations and achieved a 100 in Search Engine Optimization.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
               </div>
-              <div className="project-card card">
-                <h3>Smart Parking with Route Mapping (Prototype)</h3>
-                <p>Developed an IoT-enabled parking optimization system with ₹37,000 funding from the university.</p>
-              </div>
-              <div className="project-card card">
-                <h3>Phishing Awareness App (Ongoing)</h3>
-                <p>Creating a gamified application to educate users on phishing, supported by a submitted research paper.</p>
-              </div>
-              <div className="project-card card">
-                <h3>Phish Detector</h3>
-                <p>A dataset-driven classifier for detecting spam and phishing emails using machine learning.</p>
-              </div>
-              <div className="project-card card">
-                <h3>Email Header Analyzer</h3>
-                <p>A Java tool analyzing .eml files for SPF, DKIM, and DMARC to ensure email authenticity.</p>
-              </div>
-              <div className="project-card card"> 
-                 <h3>FortiCheck</h3>
-                 <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.</p>
-                 </div>
             </div>
-          </section>
+            <div className="internship-item">
+              <h3>Blue Planet Solutions Pvt Limited (05/2024 - 06/2024)</h3>
+              <p>CSR Intern, supported social responsibility initiatives with AICTE and assisted in developing the CJN collaboration platform.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+            <div className="internship-item">
+              <h3>Intrainz (10/2023 - 12/2023)</h3>
+              <p>Cyber Security Trainee, gained foundational experience with tools like Nmap and Tor, completing introductory labs and documentation tasks.</p>
+              <div className="certificate-hover">
+                <div className="certificate-placeholder"> Certificate</div>
+                <span>View Certificate</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-  <section id="skills" className="content-section">
-    <h2>Skills</h2>
-    <div className="skills-grid">
-      <div className="skill-category">
-        <h3>Soft Skills</h3>
-        <p>• Leadership • Communication<br />• Teamwork & Collaboration <br />• Problem-Solving <br />• Time Management <br />• Attention to Detail</p>
-      </div>
-      <div className="skill-category">
-        <h3>Programming Languages</h3>
-        <p>• Java<br /> • C<br /> • Python<br /> • SQL<br /> • HTML<br /> </p>
-      </div>
-      <div className="skill-category">
-        <h3>Tools & Environments</h3>
-        <p>• Windows • Linux <br />• Git/GitHub • Canva<br /> • Shopify • Tinkercad <br />• Ai tools <br />• Lovable, Gemini, Grok, etc</p>
-      </div>
-      <div className="skill-category full-width">
-        <h3>Cybersecurity</h3>
-        <p>• Burp Suite • Metasploit • Wireshark • OWASP ZAP • OSINT tools • VAPT • Autopsy<br />• FTK Imager • Volatility • Malware Analysis • Threat Intelligence • Incident Response <br />• Regulatory Compliance (GDPR, HIPAA) • Computer Networks • DBMS • Operating Systems</p>
-      </div>
-    </div>
-  </section>
+        <section id="projects" className="content-section">
+          <h2>Projects</h2>
+          <div className="projects-grid">
+            <div className="project-card card">
+              <h3>Personal Portfolio</h3>
+              <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Smart Parking with Route Mapping (Prototype)</h3>
+              <p>Developed an IoT-enabled parking optimization system with ₹37,000 funding from the university.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Phishing Awareness App (Ongoing)</h3>
+              <p>Creating a gamified application to educate users on phishing, supported by a submitted research paper.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Phish Detector</h3>
+              <p>A dataset-driven classifier for detecting spam and phishing emails using machine learning.</p>
+            </div>
+            <div className="project-card card">
+              <h3>Email Header Analyzer</h3>
+              <p>A Java tool analyzing .eml files for SPF, DKIM, and DMARC to ensure email authenticity.</p>
+            </div>
+            <div className="project-card card">
+              <h3>FortiCheck</h3>
+              <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.</p>
+            </div>
+          </div>
+        </section>
 
-          <section id="achievements" className="content-section">
-    <h2>Achievements</h2>
-    <div className="achievements-grid">
-      <div className="achievement-card card">
-        <h3>Academics</h3>
-        <p>Balanced 8.2 CGPA with multiple internships and leadership roles</p>
-      </div>
-      <div className="achievement-card card">
-        <h3>Recognition</h3>
-        <p>Served as Vice-President and ISR Coordinator & Received LOA from Dr. OP Bhalla Foundation</p>
-      </div>
-      <div className="achievement-card card">
-        <h3>Project Funding</h3>
-        <p>Received ₹37,000 from university to develop an IoT project</p>
-      </div>
-      <div className="achievement-card card">
-        <h3>International Participation</h3>
-        <p>Participated in NASA Space Settlement Contest</p>
-      </div>
-    </div>
-  </section>
+        <section id="skills" className="content-section">
+          <h2>Skills</h2>
+          <div className="skills-grid">
+            <div className="skill-category">
+              <h3>Soft Skills</h3>
+              <p>• Leadership • Communication<br />• Teamwork & Collaboration <br />• Problem-Solving <br />• Time Management <br />• Attention to Detail</p>
+            </div>
+            <div className="skill-category">
+              <h3>Programming Languages</h3>
+              <p>• Java<br /> • C<br /> • Python<br /> • SQL<br /> • HTML<br /> </p>
+            </div>
+            <div className="skill-category">
+              <h3>Tools & Environments</h3>
+              <p>• Windows • Linux <br />• Git/GitHub • Canva<br /> • Shopify • Tinkercad <br />• Ai tools <br />• Lovable, Gemini, Grok, etc</p>
+            </div>
+            <div className="skill-category full-width">
+              <h3>Cybersecurity</h3>
+              <p>• Burp Suite • Metasploit • Wireshark • OWASP ZAP • OSINT tools • VAPT • Autopsy<br />• FTK Imager • Volatility • Malware Analysis • Threat Intelligence • Incident Response <br />• Regulatory Compliance (GDPR, HIPAA) • Computer Networks • DBMS • Operating Systems</p>
+            </div>
+          </div>
+        </section>
 
-          <section id="certifications" className="content-section">
-            <h2>Certifications</h2>
+        <section id="achievements" className="content-section">
+          <h2>Achievements</h2>
+          <div className="achievements-grid">
+            <div className="achievement-card card">
+              <h3>Academics</h3>
+              <p>Balanced 8.2 CGPA with multiple internships and leadership roles</p>
+            </div>
+            <div className="achievement-card card">
+              <h3>Recognition</h3>
+              <p>Served as Vice-President and ISR Coordinator & Received LOA from Dr. OP Bhalla Foundation</p>
+            </div>
+            <div className="achievement-card card">
+              <h3>Project Funding</h3>
+              <p>Received ₹37,000 from university to develop an IoT project</p>
+            </div>
+            <div className="achievement-card card">
+              <h3>International Participation</h3>
+              <p>Participated in NASA Space Settlement Contest</p>
+            </div>
+          </div>
+        </section>
 
-<<<<<<< HEAD
         <section id="certifications" className="content-section">
           <h2>Certifications</h2>
-          
           <div className="nptel-certificates">
             <h3>NPTEL Certificates</h3>
             <div className="nptel-grid">
-              {[...Array(4)].map((_, i) => (
+              {nptelCertificates.map((image, i) => (
                 <div key={i} className="nptel-item">
                   <div className="certificate-image">
-                    <img 
-                      src={`/NPTEL/${i+1}.jpg`} 
+                    <img
+                      src={image}
                       alt={`NPTEL Certificate ${i+1}`}
                       onError={(e) => {
                         e.target.style.display = 'none';
-                        const fallback = e.target.nextSibling;
-                        if (fallback) fallback.style.display = 'flex';
+                        e.target.nextSibling.style.display = 'flex';
                       }}
                     />
                     <div className="certificate-fallback">
                       NPTEL {i+1}
-=======
-            <div className="nptel-certificates">
-              <h3>NPTEL Certificates</h3>
-              <div className="nptel-grid">
-                {nptelCertificates.map((image, i) => (
-                  <div key={i} className="nptel-item">
-                    <div className="certificate-image">
-                      <img
-                        src={image}
-                        alt={`NPTEL Certificate ${i+1}`}
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
-                        }}
-                      />
-                      <div className="certificate-fallback">
-                        NPTEL {i+1}
-                      </div>
->>>>>>> 7d8d7880873f6e9339b72183d877d336bf0452db
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <CertificateScroller images={otherCertificates} title="Other Certificates" />
-            <CertificateScroller images={linkedinCertificates} title="LinkedIn Certificates" />
-            <CertificateScroller images={achievementCertificates} title="Achievement Certificates" />
-            <CertificateScroller images={quickhealCertificates} title="Quick Heal Certificates" />
-          </section>
+          <CertificateScroller images={otherCertificates} title="Other Certificates" />
+          <CertificateScroller images={linkedinCertificates} title="LinkedIn Certificates" />
+          <CertificateScroller images={achievementCertificates} title="Achievement Certificates" />
+          <CertificateScroller images={quickhealCertificates} title="Quick Heal Certificates" />
+        </section>
 
-          <ContactSection />
-        </div>
-
-        <Footer />
+        <ContactSection />
       </div>
+
+      <Footer />
     </React.Fragment>
   );
 }
