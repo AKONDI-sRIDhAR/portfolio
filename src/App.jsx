@@ -7,6 +7,7 @@ import {
   linkedinCertificates,
   achievementCertificates,
   quickhealCertificates,
+  internCertificates, // Added import for internship certificates
 } from "./constants/images.js";
 
 function Starfield() {
@@ -448,9 +449,38 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Internship data with corresponding certificate images
+  const internships = [
+    {
+      title: "Engineers World Pvt Limited (11/2024 - Present)",
+      description: "Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.",
+      certificate: internCertificates[0], // EW.png
+      alt: "Engineers World Certificate"
+    },
+    {
+      title: "Luxe By Kan (07/2025 - 08/2025)",
+      description: "Shopify Web Design & Development Intern, improved UI/UX with animations and achieved a 100 in Search Engine Optimization.",
+      certificate: internCertificates[1], // lbk.png
+      alt: "Luxe By Kan Certificate"
+    },
+    {
+      title: "Blue Planet Solutions Pvt Limited (05/2024 - 06/2024)",
+      description: "CSR Intern, supported social responsibility initiatives with AICTE and assisted in developing the CJN collaboration platform.",
+      certificate: internCertificates[2], // blue.png
+      alt: "Blue Planet Solutions Certificate"
+    },
+    {
+      title: "Intrainz (10/2023 - 12/2023)",
+      description: "Cyber Security Trainee, gained foundational experience with tools like Nmap and Tor, completing introductory labs and documentation tasks.",
+      certificate: internCertificates[3], // intrainz.png
+      alt: "Intrainz Certificate"
+    }
+  ];
+
   return (
     <React.Fragment>
       <Starfield />
+      
       <header className={`main-header ${isScrolled ? 'scrolled' : ''}`} ref={headerRef}>
         <div className="header-line"></div>
         <nav className="header-nav">
@@ -485,12 +515,13 @@ function App() {
                 onMouseLeave={() => setHoverText(false)}
               >
                 <img 
-                  src={profilePhoto}
-                  alt="Sridhar"
+                  src={profilePhoto} 
+                  alt="Sridhar" 
                   className="profile-img"
                   onError={(e) => {
                     e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
+                    const fallback = e.target.nextSibling;
+                    if (fallback) fallback.style.display = 'flex';
                   }}
                 />
                 <div className="profile-fallback">
@@ -509,38 +540,26 @@ function App() {
         <section id="internships" className="content-section">
           <h2>Internships</h2>
           <div className="internships-grid">
-            <div className="internship-item">
-              <h3>Engineers World Pvt Limited (11/2024 - Present)</h3>
-              <p>Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.</p>
-              <div className="certificate-hover">
-                <div className="certificate-placeholder"> Certificate</div>
-                <span>View Certificate</span>
+            {internships.map((internship, index) => (
+              <div key={index} className="internship-item">
+                <h3>{internship.title}</h3>
+                <p>{internship.description}</p>
+                <div className="certificate-image-overlay">
+                  <img 
+                    src={internship.certificate}
+                    alt={internship.alt}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      const fallback = e.target.nextSibling;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                  <div className="certificate-fallback">
+                    {internship.alt}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="internship-item">
-              <h3>Luxe By Kan (07/2025 - 08/2025)</h3>
-              <p>Shopify Web Design & Development Intern, improved UI/UX with animations and achieved a 100 in Search Engine Optimization.</p>
-              <div className="certificate-hover">
-                <div className="certificate-placeholder"> Certificate</div>
-                <span>View Certificate</span>
-              </div>
-            </div>
-            <div className="internship-item">
-              <h3>Blue Planet Solutions Pvt Limited (05/2024 - 06/2024)</h3>
-              <p>CSR Intern, supported social responsibility initiatives with AICTE and assisted in developing the CJN collaboration platform.</p>
-              <div className="certificate-hover">
-                <div className="certificate-placeholder"> Certificate</div>
-                <span>View Certificate</span>
-              </div>
-            </div>
-            <div className="internship-item">
-              <h3>Intrainz (10/2023 - 12/2023)</h3>
-              <p>Cyber Security Trainee, gained foundational experience with tools like Nmap and Tor, completing introductory labs and documentation tasks.</p>
-              <div className="certificate-hover">
-                <div className="certificate-placeholder"> Certificate</div>
-                <span>View Certificate</span>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -591,7 +610,7 @@ function App() {
             </div>
             <div className="skill-category full-width">
               <h3>Cybersecurity</h3>
-              <p>• Burp Suite • Metasploit • Wireshark • OWASP ZAP • OSINT tools • VAPT • Autopsy<br />• FTK Imager • Volatility • Malware Analysis • Threat Intelligence • Incident Response <br />• Regulatory Compliance (GDPR, HIPAA) • Computer Networks • DBMS • Operating Systems</p>
+              <p>• Burp Suite • Metasploit • Wireshark • OWASP ZAP • OSINT tools • VAPT • Autopsy<br />• FTK Imager • Volatility • Malware Analysis • Threat Intelligence • Incident Response <br />• Regulatory Compliance (GDPR, HIPAA) • Computer Networks • DBMS • Operating Systems</p>
             </div>
           </div>
         </section>
@@ -631,7 +650,8 @@ function App() {
                       alt={`NPTEL Certificate ${i+1}`}
                       onError={(e) => {
                         e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
+                        const fallback = e.target.nextSibling;
+                        if (fallback) fallback.style.display = 'flex';
                       }}
                     />
                     <div className="certificate-fallback">

@@ -53,6 +53,12 @@ import quickheal7 from '../assets/Quickheal/7.png';
 import quickheal8 from '../assets/Quickheal/8.png';
 import quickheal9 from '../assets/Quickheal/9.png';
 
+//Internships
+import internship1 from '../assets/photos/EW.png';
+import internship2 from '../assets/photos/lbk.png';
+import internship3 from '../assets/photos/blue.png';  
+import internship4 from '../assets/photos/intrainz.png';
+
 export const profilePhoto = profile;
 
 export const nptelCertificates = [
@@ -62,6 +68,12 @@ export const nptelCertificates = [
   nptel4,
 ];
 
+export const internCertificates = [
+  internship1,
+  internship2,
+  internship3,
+  internship4,
+];
 export const otherCertificates = [
   other1,
   other2,
