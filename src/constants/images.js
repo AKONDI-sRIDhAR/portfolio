@@ -3,6 +3,29 @@
 // Profile
 import profile from '../assets/photos/profile.jpg';
 
+//canva designs
+import design1 from '../assets/canva/1.png';
+import design2 from '../assets/canva/2.png';
+import design3 from '../assets/canva/3.png';
+import design4 from '../assets/canva/4.png';
+import design5 from '../assets/canva/5.png';
+import design6 from '../assets/canva/6.png';
+import design7 from '../assets/canva/7.png';
+import design8 from '../assets/canva/8.png';
+import design9 from '../assets/canva/9.png';
+import design10 from '../assets/canva/10.png';
+import design11 from '../assets/canva/11.png';
+import design12 from '../assets/canva/12.png';
+import design13 from '../assets/canva/13.png';
+import design14 from '../assets/canva/14.png';
+import design15 from '../assets/canva/15.png';
+import design16 from '../assets/canva/16.png';
+import design17 from '../assets/canva/17.png';
+import design18 from '../assets/canva/18.png';
+import design19 from '../assets/canva/19.png';
+import design20 from '../assets/canva/20.png';
+
+
 // NPTEL
 import nptel1 from '../assets/NPTEL/1.png';
 import nptel2 from '../assets/NPTEL/2.png';
@@ -84,6 +107,13 @@ export const otherCertificates = [
   other7,
   other8,
   other9,
+];
+
+export const canvaDesigns = [
+  design1, design2, design3, design4, design5,
+  design6, design7, design8, design9, design10,
+  design11, design12, design13, design14, design15,
+  design16, design17, design18, design19, design20,
 ];
 
 export const linkedinCertificates = [
