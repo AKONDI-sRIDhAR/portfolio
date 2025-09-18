@@ -1,10 +1,11 @@
+// src/App.jsx
+
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import {
   profilePhoto,
   nptelCertificates,
   otherCertificates,
-  linkedinCertificates,
   achievementCertificates,
   quickhealCertificates,
   canvaDesigns,
@@ -838,11 +839,6 @@ function App() {
           <CertificateScroller
             images={otherCertificates}
             title="Other Certificates"
-            onImageClick={handleImageClick}
-          />
-          <CertificateScroller
-            images={linkedinCertificates}
-            title="LinkedIn Certificates"
             onImageClick={handleImageClick}
           />
           <CertificateScroller

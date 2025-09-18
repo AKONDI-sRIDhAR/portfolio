@@ -41,19 +41,7 @@ import other5 from '../assets/Other/5.png';
 import other6 from '../assets/Other/6.png';
 import other7 from '../assets/Other/7.png';
 import other8 from '../assets/Other/8.png';
-import other9 from '../assets/Other/9.png';
 
-// LinkedIn
-import linkedin1 from '../assets/LinkedIn/1.png';
-import linkedin2 from '../assets/LinkedIn/2.png';
-import linkedin3 from '../assets/LinkedIn/3.png';
-import linkedin4 from '../assets/LinkedIn/4.png';
-import linkedin5 from '../assets/LinkedIn/5.png';
-import linkedin6 from '../assets/LinkedIn/6.png';
-import linkedin7 from '../assets/LinkedIn/7.png';
-import linkedin8 from '../assets/LinkedIn/8.png';
-import linkedin9 from '../assets/LinkedIn/9.png';
-import linkedin10 from '../assets/LinkedIn/10.png';
 
 // Achievements
 import achievement1 from '../assets/achievements/1.png';
@@ -106,7 +94,6 @@ export const otherCertificates = [
   other6,
   other7,
   other8,
-  other9,
 ];
 
 export const canvaDesigns = [
@@ -114,19 +101,6 @@ export const canvaDesigns = [
   design6, design7, design8, design9, design10,
   design11, design12, design13, design14, design15,
   design16, design17, design18, design19, design20,
-];
-
-export const linkedinCertificates = [
-  linkedin1,
-  linkedin2,
-  linkedin3,
-  linkedin4,
-  linkedin5,
-  linkedin6,
-  linkedin7,
-  linkedin8,
-  linkedin9,
-  linkedin10,
 ];
 
 export const achievementCertificates = [
