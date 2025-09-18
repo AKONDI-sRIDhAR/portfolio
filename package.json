@@ -13,7 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "engines": {
-  "node": "18.x"
+  "node": "22.x"
 },
   "dependencies": {
     "@headlessui/react": "^2.2.8",
