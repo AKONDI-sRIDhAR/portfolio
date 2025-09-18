@@ -6,12 +6,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "chmod +x node_modules/.bin/vite && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
+  "engines": {
+  "node": "18.x"
+},
   "dependencies": {
     "@headlessui/react": "^2.2.8",
     "react": "^19.1.1",
