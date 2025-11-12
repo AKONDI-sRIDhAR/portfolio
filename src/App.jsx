@@ -876,54 +876,54 @@ function App() {
           </div>
         </section>
 
-        <section id="certifications" className="content-section">
-          <h2>Certifications</h2>
-          <div className="nptel-certificates">
-            <h3>NPTEL Certificates</h3>
-            <div className="nptel-grid">
-              {nptelCertificates.map((image, i) => (
-                <div key={i} className="nptel-item">
-                  <div className="certificate-image">
-                    <img
-                      src={image}
-                      alt={`NPTEL Certificate ${i + 1}`}
-                      onClick={() => handleImageClick(image)} // Added click handler
-                      onError={(e) => {
-                        e.target.style.display = "none";
-                        const fallback = e.target.nextSibling;
-                        if (fallback) fallback.style.display = "flex";
-                      }}
-                    />
-                    <div className="certificate-fallback">
-                      NPTEL {i + 1}
-                    </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Merged CertificateScrollers (Kept LinkedIn from feat/portfolio-fixes) */}
-          <CertificateScroller
-            images={otherCertificates}
-            title="Other Certificates"
-            onImageClick={handleImageClick}
-          />
-          <CertificateScroller 
-            images={linkedinCertificates} 
-            title="LinkedIn Certificates" 
-            onImageClick={handleImageClick}
-          />
-          <CertificateScroller
-            images={achievementCertificates}
-            title="Achievement Certificates"
-            onImageClick={handleImageClick}
-          />
-          <CertificateScroller
-            images={quickhealCertificates}
-            title="Quick Heal Certificates"
-            onImageClick={handleImageClick}
-          />
-        </section>
+       <section id="certifications" className="content-section">
+  <h2>Certifications</h2>
+
+  <div className="nptel-certificates">
+    <h3>NPTEL Certificates</h3>
+
+    <div className="nptel-grid">
+      {nptelCertificates.map((image, i) => (
+        <div key={i} className="nptel-item">
+          <div className="certificate-image">
+            <img
+              src={image}
+              alt={`NPTEL Certificate ${i + 1}`}
+              onClick={() => handleImageClick(image)} // Added click handler
+              onError={(e) => {
+                e.target.style.display = "none";
+                const fallback = e.target.nextSibling;
+                if (fallback) fallback.style.display = "flex";
+              }}
+            />
+            <div className="certificate-fallback">
+              NPTEL {i + 1}
+            </div>
+          </div>
+        </div> 
+      ))}
+    </div>
+  </div>
+
+  <CertificateScroller
+    images={otherCertificates}
+    title="Other Certificates"
+    onImageClick={handleImageClick}
+  />
+
+  <CertificateScroller
+    images={achievementCertificates}
+    title="Achievement Certificates"
+    onImageClick={handleImageClick}
+  />
+
+  <CertificateScroller
+    images={quickhealCertificates}
+    title="Quick Heal Certificates"
+    onImageClick={handleImageClick}
+  />
+</section>
+
 
         {/* Added Canva Designs section from main */}
         <section id="canva-designs" className="content-section">
