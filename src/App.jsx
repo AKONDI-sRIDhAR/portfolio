@@ -571,7 +571,7 @@ function App() {
   // Internship data with corresponding certificate images (from main)
   const internships = [
     {
-      title: "Engineers World Pvt Limited (11/2024 - Present)",
+      title: "Engineers World Pvt Limited (11/2024 - 07/2025)",
       description:
         "Cyber Security Analyst, conducting vulnerability assessments and penetration tests, identifying issues, and leading the EW CTF project while mentoring juniors.",
       certificate: internCertificates[0], // EW.png
