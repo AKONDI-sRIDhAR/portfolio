@@ -481,7 +481,7 @@ function Footer() {
     <footer className="main-footer">
       <div className="footer-content">
         <div className="footer-text">
-          <span className="copyright">© 2025 श्रीdhaर् Akondi. All rights reserved.</span>
+          <span className="copyright">© 2025 श्रीdhaర్ Akondi. All rights reserved.</span>
         </div>
       </div>
     </footer>
@@ -706,15 +706,15 @@ function App() {
               <h3>Crisp Talent Spotter</h3>
               <p>
                 AI Technical Interview Platform CRISP (Candidate Research & Intelligent Screening Platform) is a modern web application designed to revolutionize the technical hiring process.
-                <a href="https://github.com/AKONDI-sRIDhAR/crisp-talent-spotter" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
+                <a href="https://crisp-talent-spotter.vercel.app/" target="_blank" rel="noopener noreferrer"> View</a>
               </p>
             </div>
             {/* 2. Email Header Analyzer (KEPT SAME) */}
             <div className="project-card card">
               <h3>Email Header Analyzer</h3>
               <p>
-                A Java tool analyzing .eml files for SPF, DKIM, and DMARC to
-                ensure email authenticity.
+                A Java tool analyzing .eml files for SPF, DKIM, and DMARC to ensure email authenticity.
+                <a href="https://github.com/AKONDI-sRIDhAR/Email-header-analyzer" target="_blank" rel="noopener noreferrer"> View</a>
               </p>
             </div>
             {/* 3. Pyscreener (UPDATED) */}
@@ -722,15 +722,15 @@ function App() {
               <h3>Pyscreener</h3>
               <p>
                 This uses Mediapipe for hand tracking and a Tkinter overlay for visual feedback. Key features include: Open Hand: Activates the snipping tool.
-                <a href="https://github.com/AKONDI-sRIDhAR/pyscreener" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
+                <a href="https://github.com/AKONDI-sRIDhAR/pyscreener" target="_blank" rel="noopener noreferrer"> View</a>
               </p>
             </div>
             {/* 4. Lets get you into bed (UPDATED) */}
             <div className="project-card card">
               <h3>Lets get you into bed</h3>
               <p>
-                Let's Get You Into Bed 🌙 A cozy bedtime stories site with daily AI-generated tales for kids (4-10). Features witty Akbar-Birbal or Tenali Ramakrishna stories, automated via n8n and updated daily.
-                <a href="https://lets-get-you-into-bed.vercel.app/" target="_blank" rel="noopener noreferrer"> View Live</a>
+                A cozy bedtime stories site with daily AI-generated tales for kids (4-10). Features witty Akbar-Birbal or Tenali Ramakrishna stories, automated via n8n and updated daily.
+                <a href="https://lets-get-you-into-bed.vercel.app/" target="_blank" rel="noopener noreferrer"> View</a>
               </p>
             </div>
             {/* 5. Smart Parking with Route Mapping (KEPT SAME) */}
@@ -745,18 +745,29 @@ function App() {
             <div className="project-card card">
               <h3>Phish Detector</h3>
               <p>
-                A dataset-driven classifier for detecting spam and phishing
-                emails using machine learning.
+                A dataset-driven classifier for detecting spam and phishing emails using machine learning.
+                <a href="https://github.com/AKONDI-sRIDhAR/Phish-Detector" target="_blank" rel="noopener noreferrer"> View</a>
               </p>
             </div>
             {/* Retained FortiCheck and Personal Portfolio as they were not explicitly removed */}
             <div className="project-card card">
               <h3>Personal Portfolio</h3>
-              <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
+              <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.
+                <a href="https://github.com/AKONDI-sRIDhAR/portfolio" target="_blank" rel="noopener noreferrer"> View</a>
+              </p>
+              
             </div>
             <div className="project-card card">
                  <h3>FortiCheck</h3>
-                 <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.</p>
+                 <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.
+                  <a href="https://github.com/AKONDI-sRIDhAR/FortiCheck" target="_blank" rel="noopener noreferrer"> View</a>
+                 </p>
+            </div>
+            <div className="project-card card">
+                 <h3>Phishrine</h3>
+                 <p>A Gamefied Phishing Awareness Application on phishing detection and prevention.(on going)
+                  <a href="https://github.com/AKONDI-sRIDhAR/phishrine" target="_blank" rel="noopener noreferrer"> View</a>
+                 </p>
             </div>
           </div>
         </section>
