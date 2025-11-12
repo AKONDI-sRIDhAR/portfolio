@@ -453,7 +453,7 @@ function ContactSection() {
         </a>
 
         <a
-          href={resumeLink} // Using the updated variable
+          href={resumeLink} 
           target="_blank"
           rel="noopener noreferrer"
           className="contact-card card"
