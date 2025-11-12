@@ -6,10 +6,11 @@ import {
   profilePhoto,
   nptelCertificates,
   otherCertificates,
+  linkedinCertificates, // Kept from feat/portfolio-fixes
   achievementCertificates,
   quickhealCertificates,
-  canvaDesigns,
-  internCertificates,
+  canvaDesigns, // Kept from main
+  internCertificates, // Kept from main
 } from "./constants/images.js";
 
 function Starfield() {
@@ -99,6 +100,7 @@ function TermuxBanner() {
   );
 }
 
+// Merged CertificateScroller function with onImageClick from 'main'
 function CertificateScroller({ images, title, onImageClick }) {
   const scrollerRef = useRef(null);
   const containerRef = useRef(null);
@@ -114,7 +116,7 @@ function CertificateScroller({ images, title, onImageClick }) {
 
     const animate = () => {
       position -= speed;
-
+      
       if (position < -scroller.scrollWidth / 2) {
         position = 0;
       }
@@ -141,7 +143,7 @@ function CertificateScroller({ images, title, onImageClick }) {
                 <img
                   src={image}
                   alt={`${title} Certificate ${i + 1}`}
-                  onClick={() => onImageClick(image)}
+                  onClick={() => onImageClick(image)} // Retained onClick
                   onError={(e) => {
                     e.target.style.display = "none";
                     const fallback = e.target.nextSibling;
@@ -160,7 +162,7 @@ function CertificateScroller({ images, title, onImageClick }) {
                 <img
                   src={image}
                   alt={`${title} Certificate ${i + 1}`}
-                  onClick={() => onImageClick(image)}
+                  onClick={() => onImageClick(image)} // Retained onClick
                   onError={(e) => {
                     e.target.style.display = "none";
                     const fallback = e.target.nextSibling;
@@ -194,7 +196,7 @@ function TerminalSimulation() {
     "cat alma_matter.txt":
       "Final-year B.Tech CSE student at Manav Rachna University, CGPA 8.2/10.0 (6 semester avg), and 7th-12th class graduate from Sri Chaitanya School (2017-2022).",
     "cat internships.txt":
-      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - 07/2024)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
+      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - 07/2025)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
     "cat skills.txt":
       "Pentesting & Security Tools: Burp Suite, Metasploit, ZAP, Wireshark, OWASP ZAP, OSINT tools, VAPT, Phishing Analysis\nForensics & Analysis: Autopsy, FTK Imager, Volatility\nLanguages: Java, Python, C, SQL, HTML\nEnvironments: Kali Linux, Parrot OS, Windows\nOther: Canva (video/photo editing), Shopify, Tinkercad, Data Entry",
     "cat achievements.txt":
@@ -388,6 +390,9 @@ DNSSEC: unsigned
 }
 
 function ContactSection() {
+  // Updated resume redirect link
+  const resumeLink = "https://drive.google.com/drive/u/0/folders/12Xg1wutDKQDCJDBgLMgCBXhYlRYbCSvO";
+
   return (
     <section id="contact" className="content-section">
       <h2>Contact Me</h2>
@@ -448,19 +453,19 @@ function ContactSection() {
         </a>
 
         <a
-          href="https://drive.google.com/drive/u/0/folders/12Xg1wutDKQDCJDBgLMgCBXhYlRYbCSvO"
+          href={resumeLink} 
           target="_blank"
           rel="noopener noreferrer"
           className="contact-card card"
         >
           <div className="contact-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffae" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
-  <polyline points="13 2 13 9 20 9" />
-  <line x1="16" y1="13" x2="8" y2="13" />
-  <line x1="16" y1="17" x2="8" y2="17" />
-  <line x1="10" y1="9" x2="8" y2="9" />
-</svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffae" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+              <polyline points="13 2 13 9 20 9" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <line x1="10" y1="9" x2="8" y2="9" />
+            </svg>
           </div>
           <h3>Resume</h3>
           <p>Download</p>
@@ -470,21 +475,20 @@ function ContactSection() {
   );
 }
 
-
-
+// Merged Footer function (using the cleaner 'main' version)
 function Footer() {
   return (
     <footer className="main-footer">
       <div className="footer-content">
         <div className="footer-text">
-          <span className="copyright">© 2025 श्रीdhaర్ Akondi. All rights reserved.</span>
+          <span className="copyright">© 2025 श्रीdhaर् Akondi. All rights reserved.</span>
         </div>
-        
       </div>
     </footer>
   );
 }
 
+// ImageModal function from 'main' (essential for certificate viewing)
 function ImageModal({ imageSrc, onClose }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -544,7 +548,7 @@ function App() {
   const [hoverText, setHoverText] = useState(false);
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // State for modal
 
   useEffect(() => {
     const handleScroll = () => {
@@ -564,7 +568,7 @@ function App() {
     setSelectedImage(null);
   };
 
-  // Internship data with corresponding certificate images
+  // Internship data with corresponding certificate images (from main)
   const internships = [
     {
       title: "Engineers World Pvt Limited (11/2024 - Present)",
@@ -613,7 +617,7 @@ function App() {
           <a href="#skills">Skills</a>
           <a href="#achievements">Achievements</a>
           <a href="#certifications">Certifications</a>
-          <a href="#canva-designs">Canva Designs</a>
+          <a href="#canva-designs">Canva Designs</a> {/* Added from main */}
           <a href="#contact">Contact</a>
         </nav>
       </header>
@@ -668,10 +672,12 @@ function App() {
         <section id="internships" className="content-section">
           <h2>Internships</h2>
           <div className="internships-grid">
+            {/* Merged internships rendering logic (using the data array from main) */}
             {internships.map((internship, index) => (
               <div key={index} className="internship-item">
                 <h3>{internship.title}</h3>
                 <p>{internship.description}</p>
+                {/* Image overlay with click handler from main */}
                 <div className="certificate-image-overlay">
                   <img
                     src={internship.certificate}
@@ -695,6 +701,7 @@ function App() {
         <section id="projects" className="content-section">
           <h2>Projects</h2>
           <div className="projects-grid">
+            {/* 1. Crisp Talent Spotter (UPDATED) */}
             <div className="project-card card">
               <h3>Crisp Talent Spotter</h3>
               <p>
@@ -702,6 +709,7 @@ function App() {
                 <a href="https://github.com/AKONDI-sRIDhAR/crisp-talent-spotter" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
               </p>
             </div>
+            {/* 2. Email Header Analyzer (KEPT SAME) */}
             <div className="project-card card">
               <h3>Email Header Analyzer</h3>
               <p>
@@ -709,6 +717,7 @@ function App() {
                 ensure email authenticity.
               </p>
             </div>
+            {/* 3. Pyscreener (UPDATED) */}
             <div className="project-card card">
               <h3>Pyscreener</h3>
               <p>
@@ -716,6 +725,7 @@ function App() {
                 <a href="https://github.com/AKONDI-sRIDhAR/pyscreener" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
               </p>
             </div>
+            {/* 4. Lets get you into bed (UPDATED) */}
             <div className="project-card card">
               <h3>Lets get you into bed</h3>
               <p>
@@ -723,6 +733,7 @@ function App() {
                 <a href="https://lets-get-you-into-bed.vercel.app/" target="_blank" rel="noopener noreferrer"> View Live</a>
               </p>
             </div>
+            {/* 5. Smart Parking with Route Mapping (KEPT SAME) */}
             <div className="project-card card">
               <h3>Smart Parking with Route Mapping (Prototype)</h3>
               <p>
@@ -730,6 +741,7 @@ function App() {
                 funding from the university.
               </p>
             </div>
+            {/* 6. Phish Detector (KEPT SAME) */}
             <div className="project-card card">
               <h3>Phish Detector</h3>
               <p>
@@ -737,11 +749,21 @@ function App() {
                 emails using machine learning.
               </p>
             </div>
+            {/* Retained FortiCheck and Personal Portfolio as they were not explicitly removed */}
+            <div className="project-card card">
+              <h3>Personal Portfolio</h3>
+              <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
+            </div>
+            <div className="project-card card">
+                 <h3>FortiCheck</h3>
+                 <p>A Java-based tool for user authentication, AES encryption, and file integrity verification.</p>
+            </div>
           </div>
         </section>
 
         <section id="skills" className="content-section">
           <h2>Skills</h2>
+          {/* Skills section structure is identical, no merge needed here. */}
           <div className="skills-grid">
             <div className="skill-category">
               <h3>Soft Skills</h3>
@@ -782,6 +804,7 @@ function App() {
 
         <section id="achievements" className="content-section">
           <h2>Achievements</h2>
+          {/* Achievements section structure is identical, no merge needed here. */}
           <div className="achievements-grid">
             <div className="achievement-card card">
               <h3>Academics</h3>
@@ -820,7 +843,7 @@ function App() {
                     <img
                       src={image}
                       alt={`NPTEL Certificate ${i + 1}`}
-                      onClick={() => handleImageClick(image)}
+                      onClick={() => handleImageClick(image)} // Added click handler
                       onError={(e) => {
                         e.target.style.display = "none";
                         const fallback = e.target.nextSibling;
@@ -835,10 +858,16 @@ function App() {
               ))}
             </div>
           </div>
-
+          
+          {/* Merged CertificateScrollers (Kept LinkedIn from feat/portfolio-fixes) */}
           <CertificateScroller
             images={otherCertificates}
             title="Other Certificates"
+            onImageClick={handleImageClick}
+          />
+          <CertificateScroller 
+            images={linkedinCertificates} 
+            title="LinkedIn Certificates" 
             onImageClick={handleImageClick}
           />
           <CertificateScroller
@@ -853,6 +882,7 @@ function App() {
           />
         </section>
 
+        {/* Added Canva Designs section from main */}
         <section id="canva-designs" className="content-section">
           <CertificateScroller
             images={canvaDesigns}
@@ -860,11 +890,12 @@ function App() {
             onImageClick={handleImageClick}
           />
         </section>
-
+        
         <ContactSection />
       </div>
 
       <Footer />
+      {/* Added ImageModal component from main for viewing certificates */}
       <ImageModal imageSrc={selectedImage} onClose={handleCloseModal} />
     </React.Fragment>
   );
