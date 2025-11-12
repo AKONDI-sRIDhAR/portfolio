@@ -194,7 +194,7 @@ function TerminalSimulation() {
     "cat alma_matter.txt":
       "Final-year B.Tech CSE student at Manav Rachna University, CGPA 8.2/10.0 (6 semester avg), and 7th-12th class graduate from Sri Chaitanya School (2017-2022).",
     "cat internships.txt":
-      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - Present)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
+      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - 07/2024)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
     "cat skills.txt":
       "Pentesting & Security Tools: Burp Suite, Metasploit, ZAP, Wireshark, OWASP ZAP, OSINT tools, VAPT, Phishing Analysis\nForensics & Analysis: Autopsy, FTK Imager, Volatility\nLanguages: Java, Python, C, SQL, HTML\nEnvironments: Kali Linux, Parrot OS, Windows\nOther: Canva (video/photo editing), Shopify, Tinkercad, Data Entry",
     "cat achievements.txt":
@@ -630,7 +630,7 @@ function App() {
               <p>
                 Yo! I'm Akondi Naga Sri Sai Datta Sridhar, a cybersecurity buff
                 and coder who loves hacking threats and building cool tech! A
-                B.Tech CSE champ at Manav Rachna University (8.2 CGPA), I've
+                B.Tech CSE champ at Manav Rachna University (8.4 CGPA), I've
                 rocked 4 internships, served as Vice President at Dr. OP Bhalla
                 Foundation Student Council, and geek out as an AI enthusiast and
                 fitness buff—using AI to streamline my daily grind!
