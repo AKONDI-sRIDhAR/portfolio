@@ -196,7 +196,7 @@ function TerminalSimulation() {
     "cat alma_matter.txt":
       "Final-year B.Tech CSE student at Manav Rachna University, CGPA 8.2/10.0 (6 semester avg), and 7th-12th class graduate from Sri Chaitanya School (2017-2022).",
     "cat internships.txt":
-      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - 07/2024)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
+      "1. Engineers World Pvt Limited – Cyber Security Analyst (11/2024 - 07/2025)\n2. Luxe By Kan – Shopify Web Design & Development Intern (07/2025 - 08/2025)\n3. Blue Planet Solutions Pvt Limited – CSR Intern (05/2024 - 06/2024)\n4. Intrainz – Cyber Security Trainee (10/2023 - 12/2023)",
     "cat skills.txt":
       "Pentesting & Security Tools: Burp Suite, Metasploit, ZAP, Wireshark, OWASP ZAP, OSINT tools, VAPT, Phishing Analysis\nForensics & Analysis: Autopsy, FTK Imager, Volatility\nLanguages: Java, Python, C, SQL, HTML\nEnvironments: Kali Linux, Parrot OS, Windows\nOther: Canva (video/photo editing), Shopify, Tinkercad, Data Entry",
     "cat achievements.txt":
@@ -390,6 +390,9 @@ DNSSEC: unsigned
 }
 
 function ContactSection() {
+  // Updated resume redirect link
+  const resumeLink = "https://drive.google.com/drive/u/0/folders/12Xg1wutDKQDCJDBgLMgCBXhYlRYbCSvO";
+
   return (
     <section id="contact" className="content-section">
       <h2>Contact Me</h2>
@@ -450,7 +453,7 @@ function ContactSection() {
         </a>
 
         <a
-          href="https://drive.google.com/drive/u/0/folders/12Xg1wutDKQDCJDBgLMgCBXhYlRYbCSvO"
+          href={resumeLink} // Using the updated variable
           target="_blank"
           rel="noopener noreferrer"
           className="contact-card card"
@@ -698,7 +701,7 @@ function App() {
         <section id="projects" className="content-section">
           <h2>Projects</h2>
           <div className="projects-grid">
-            {/* Project list incorporating new projects from 'main' */}
+            {/* 1. Crisp Talent Spotter (UPDATED) */}
             <div className="project-card card">
               <h3>Crisp Talent Spotter</h3>
               <p>
@@ -706,6 +709,7 @@ function App() {
                 <a href="https://github.com/AKONDI-sRIDhAR/crisp-talent-spotter" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
               </p>
             </div>
+            {/* 2. Email Header Analyzer (KEPT SAME) */}
             <div className="project-card card">
               <h3>Email Header Analyzer</h3>
               <p>
@@ -713,6 +717,7 @@ function App() {
                 ensure email authenticity.
               </p>
             </div>
+            {/* 3. Pyscreener (UPDATED) */}
             <div className="project-card card">
               <h3>Pyscreener</h3>
               <p>
@@ -720,6 +725,7 @@ function App() {
                 <a href="https://github.com/AKONDI-sRIDhAR/pyscreener" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
               </p>
             </div>
+            {/* 4. Lets get you into bed (UPDATED) */}
             <div className="project-card card">
               <h3>Lets get you into bed</h3>
               <p>
@@ -727,6 +733,7 @@ function App() {
                 <a href="https://lets-get-you-into-bed.vercel.app/" target="_blank" rel="noopener noreferrer"> View Live</a>
               </p>
             </div>
+            {/* 5. Smart Parking with Route Mapping (KEPT SAME) */}
             <div className="project-card card">
               <h3>Smart Parking with Route Mapping (Prototype)</h3>
               <p>
@@ -734,6 +741,7 @@ function App() {
                 funding from the university.
               </p>
             </div>
+            {/* 6. Phish Detector (KEPT SAME) */}
             <div className="project-card card">
               <h3>Phish Detector</h3>
               <p>
@@ -741,7 +749,7 @@ function App() {
                 emails using machine learning.
               </p>
             </div>
-            {/* Retained FortiCheck and Personal Portfolio from feat/portfolio-fixes */}
+            {/* Retained FortiCheck and Personal Portfolio as they were not explicitly removed */}
             <div className="project-card card">
               <h3>Personal Portfolio</h3>
               <p>The site you're exploring right now, showcasing my skills and projects with a terminal-inspired design.</p>
