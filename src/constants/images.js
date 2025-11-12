@@ -43,15 +43,16 @@ import other7 from '../assets/Other/7.png';
 import other8 from '../assets/Other/8.png';
 
 // LinkedIn (from feat/portfolio-fixes)
-import linkedin1 from '../assets/LinkedIn/1.png';
-import linkedin3 from '../assets/LinkedIn/3.png';
-import linkedin4 from '../assets/LinkedIn/4.png';
-import linkedin5 from '../assets/LinkedIn/5.png';
-import linkedin6 from '../assets/LinkedIn/6.png';
-import linkedin7 from '../assets/LinkedIn/7.png';
-import linkedin8 from '../assets/LinkedIn/8.png';
-import linkedin9 from '../assets/LinkedIn/9.png';
-import linkedin10 from '../assets/LinkedIn/10.png';
+import linkedin1 from '../assets/linkedin/1.png';
+import linkedin2 from '../assets/linkedin/2.png';
+import linkedin3 from '../assets/linkedin/3.png';
+import linkedin4 from '../assets/linkedin/4.png';
+import linkedin5 from '../assets/linkedin/5.png';
+import linkedin6 from '../assets/linkedin/6.png';
+import linkedin7 from '../assets/linkedin/7.png';
+import linkedin8 from '../assets/linkedin/8.png';
+import linkedin9 from '../assets/linkedin/9.png';
+import linkedin10 from '../assets/linkedin/10.png';
 
 // Achievements
 import achievement1 from '../assets/achievements/1.png';
