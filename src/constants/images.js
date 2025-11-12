@@ -41,6 +41,9 @@ import other5 from '../assets/Other/5.png';
 import other6 from '../assets/Other/6.png';
 import other7 from '../assets/Other/7.png';
 import other8 from '../assets/Other/8.png';
+import other9 from '../assets/Other/9.png';
+import other10 from '../assets/Other/10.png';
+import other11 from '../assets/Other/11.png';
 
 
 // Achievements
@@ -94,6 +97,9 @@ export const otherCertificates = [
   other6,
   other7,
   other8,
+  other9,
+  other10,
+  other11,
 ];
 
 export const canvaDesigns = [
