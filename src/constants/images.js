@@ -44,7 +44,6 @@ import other8 from '../assets/Other/8.png';
 
 // LinkedIn (from feat/portfolio-fixes)
 import linkedin1 from '../assets/LinkedIn/1.png';
-import linkedin2 from '../assets/LinkedIn/2.png';
 import linkedin3 from '../assets/LinkedIn/3.png';
 import linkedin4 from '../assets/LinkedIn/4.png';
 import linkedin5 from '../assets/LinkedIn/5.png';
