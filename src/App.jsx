@@ -448,7 +448,7 @@ function ContactSection() {
         </a>
 
         <a
-          href="https://drive.google.com/file/d/1eLjWNoqZZoaHnwsGbelv_UAAxHqDMbyH/view?usp=sharing"
+          href="https://drive.google.com/drive/u/0/folders/12Xg1wutDKQDCJDBgLMgCBXhYlRYbCSvO"
           target="_blank"
           rel="noopener noreferrer"
           className="contact-card card"
@@ -696,31 +696,10 @@ function App() {
           <h2>Projects</h2>
           <div className="projects-grid">
             <div className="project-card card">
-              <h3>Personal Portfolio</h3>
+              <h3>Crisp Talent Spotter</h3>
               <p>
-                The site you're exploring right now, showcasing my skills and
-                projects with a terminal-inspired design.
-              </p>
-            </div>
-            <div className="project-card card">
-              <h3>Smart Parking with Route Mapping (Prototype)</h3>
-              <p>
-                Developed an IoT-enabled parking optimization system with ₹37,000
-                funding from the university.
-              </p>
-            </div>
-            <div className="project-card card">
-              <h3>Phishing Awareness App (Ongoing)</h3>
-              <p>
-                Creating a gamified application to educate users on phishing,
-                supported by a submitted research paper.
-              </p>
-            </div>
-            <div className="project-card card">
-              <h3>Phish Detector</h3>
-              <p>
-                A dataset-driven classifier for detecting spam and phishing
-                emails using machine learning.
+                AI Technical Interview Platform CRISP (Candidate Research & Intelligent Screening Platform) is a modern web application designed to revolutionize the technical hiring process.
+                <a href="https://github.com/AKONDI-sRIDhAR/crisp-talent-spotter" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
               </p>
             </div>
             <div className="project-card card">
@@ -731,10 +710,31 @@ function App() {
               </p>
             </div>
             <div className="project-card card">
-              <h3>FortiCheck</h3>
+              <h3>Pyscreener</h3>
               <p>
-                A Java-based tool for user authentication, AES encryption, and
-                file integrity verification.
+                This uses Mediapipe for hand tracking and a Tkinter overlay for visual feedback. Key features include: Open Hand: Activates the snipping tool.
+                <a href="https://github.com/AKONDI-sRIDhAR/pyscreener" target="_blank" rel="noopener noreferrer"> View on GitHub</a>
+              </p>
+            </div>
+            <div className="project-card card">
+              <h3>Lets get you into bed</h3>
+              <p>
+                Let's Get You Into Bed 🌙 A cozy bedtime stories site with daily AI-generated tales for kids (4-10). Features witty Akbar-Birbal or Tenali Ramakrishna stories, automated via n8n and updated daily.
+                <a href="https://lets-get-you-into-bed.vercel.app/" target="_blank" rel="noopener noreferrer"> View Live</a>
+              </p>
+            </div>
+            <div className="project-card card">
+              <h3>Smart Parking with Route Mapping (Prototype)</h3>
+              <p>
+                Developed an IoT-enabled parking optimization system with ₹37,000
+                funding from the university.
+              </p>
+            </div>
+            <div className="project-card card">
+              <h3>Phish Detector</h3>
+              <p>
+                A dataset-driven classifier for detecting spam and phishing
+                emails using machine learning.
               </p>
             </div>
           </div>
